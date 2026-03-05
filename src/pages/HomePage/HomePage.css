@@ -1,3 +1,6 @@
+/* ============================================================
+   Hero section
+   ============================================================ */
 .hero {
   background-color: var(--color-primary);
   padding-block: var(--spacing-xl);
@@ -21,31 +24,37 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   color: var(--color-highlight);
   line-height: 1;
+  margin: 0;
 }
 
 .hero__subtitle {
   font-family: var(--font-heading);
   font-size: clamp(1.5rem, 3vw, 2rem);
   color: var(--color-white);
+  margin: 0;
   margin-top: calc(var(--spacing-sm) * -1);
 }
 
 .hero__description {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--color-light);
-  max-width: 42ch;
+  max-width: 38ch;
   line-height: 1.7;
+  margin: 0;
 }
 
+/* CTA button */
 .hero__cta {
   display: inline-block;
   background-color: var(--color-highlight);
   color: var(--color-dark);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 1rem;
   padding: 0.75rem 2rem;
   border-radius: var(--radius-sm);
   align-self: flex-start;
+  text-decoration: none;
   transition: background-color 0.2s ease;
 }
 
@@ -58,8 +67,112 @@
   outline-offset: 3px;
 }
 
+/* Hero food image */
+.hero__image-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero__image {
+  width: 100%;
+  max-width: 460px;
+  height: 380px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
 @media (max-width: 700px) {
   .hero__inner {
     grid-template-columns: 1fr;
+  }
+
+  .hero__image-wrapper {
+    order: -1;
+    justify-content: center;
+  }
+
+  .hero__image {
+    height: 240px;
+    max-width: 100%;
+  }
+
+  .hero__cta {
+    align-self: center;
+  }
+}
+
+/* ============================================================
+   This week's specials section
+   ============================================================ */
+.specials {
+  padding-block: var(--spacing-xl);
+  background-color: var(--color-white);
+}
+
+.specials__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.specials__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  color: var(--color-dark);
+  margin: 0;
+}
+
+/* "Online Menu" button — rounded yellow pill matching the design */
+.specials__menu-btn {
+  display: inline-block;
+  background-color: var(--color-highlight);
+  color: var(--color-dark);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.65rem 1.75rem;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.specials__menu-btn:hover {
+  background-color: #d4af12;
+}
+
+.specials__menu-btn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 3-column card grid */
+.specials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .specials__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .specials__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .specials__header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

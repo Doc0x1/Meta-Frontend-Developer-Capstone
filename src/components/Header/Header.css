@@ -15,32 +15,14 @@
   min-height: 72px;
 }
 
-/* Logo */
+/* SVG logo image */
 .header__logo {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-  text-decoration: none;
+  display: block;
+  height: 40px;
+  width: auto;
 }
 
-.header__logo-name {
-  font-family: var(--font-heading);
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  letter-spacing: -0.5px;
-}
-
-.header__logo-tagline {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: var(--color-secondary);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .header__inner {
     flex-direction: column;
     gap: var(--spacing-sm);

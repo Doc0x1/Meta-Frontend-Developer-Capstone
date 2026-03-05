@@ -12,7 +12,9 @@
   color: var(--color-dark);
   padding-block: var(--spacing-xs);
   border-bottom: 2px solid transparent;
+  text-decoration: none;
   transition: border-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
 }
 
 .nav__link:hover {
@@ -25,11 +27,21 @@
   border-bottom-color: var(--color-highlight);
 }
 
-/* Collapse to burger-friendly stacking on small screens */
-@media (max-width: 600px) {
+/* Collapse to wrapping row on medium screens */
+@media (max-width: 900px) {
   .nav__list {
     gap: var(--spacing-md);
     flex-wrap: wrap;
     justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav__list {
+    gap: var(--spacing-sm);
+  }
+
+  .nav__link {
+    font-size: 0.9rem;
   }
 }

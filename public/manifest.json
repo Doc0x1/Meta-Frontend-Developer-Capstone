@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Little Lemon",
+  "name": "Little Lemon Restaurant",
+  "description": "Reserve a table at Little Lemon, a family-owned Mediterranean restaurant in Chicago.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#495e57",
+  "background_color": "#edefee"
 }

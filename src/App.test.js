@@ -14,10 +14,12 @@ test("renders the site header", () => {
 
 test("renders the Home navigation link", () => {
   render(<App />);
-  expect(screen.getByRole("link", { name: /^home$/i })).toBeInTheDocument();
+  // Home link appears in both header and footer nav
+  expect(screen.getAllByRole("link", { name: /^home$/i }).length).toBeGreaterThan(0);
 });
 
 test("renders the Reservations navigation link", () => {
   render(<App />);
-  expect(screen.getByRole("link", { name: /reservations/i })).toBeInTheDocument();
+  // Reservations link appears in both header and footer nav
+  expect(screen.getAllByRole("link", { name: /reservations/i }).length).toBeGreaterThan(0);
 });
