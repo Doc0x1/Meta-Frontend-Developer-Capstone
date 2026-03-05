@@ -6,7 +6,9 @@ A React web application for the **Little Lemon** Mediterranean restaurant in Chi
 
 ## Features
 
+- **Home page** — hero section with CTA and a "This week's specials" card grid
 - **Table reservation form** — select a date, available time slot, party size, and occasion, with full client-side validation and accessible error messages
+- **Booking confirmation page** — summary of the reservation details after submission
 - **React Router navigation** — separate pages for Home (`/`), Reservations (`/reservations`), and Booking Confirmation (`/confirmed`)
 - **Accessible UI** — semantic HTML, ARIA labels, live regions for errors, keyboard-navigable controls, and focus rings
 - **Responsive layout** — CSS custom properties + grid/flexbox adapts from mobile to desktop
@@ -65,18 +67,24 @@ src/
 ├── App.test.js                   # App-level smoke tests
 ├── components/
 │   ├── Header/
-│   │   ├── Header.js             # Site header with logo and nav
+│   │   ├── Header.js             # Site header with SVG logo and nav
 │   │   └── Header.css
 │   ├── Nav/
 │   │   ├── Nav.js                # Primary navigation links
 │   │   └── Nav.css
+│   ├── Footer/
+│   │   ├── Footer.js             # Site footer: nav, contact, social links
+│   │   └── Footer.css
+│   ├── SpecialCard/
+│   │   ├── SpecialCard.js        # Weekly special dish card
+│   │   └── SpecialCard.css
 │   └── BookingForm/
 │       ├── BookingForm.js        # Controlled form with validation logic
 │       ├── BookingForm.css
 │       └── BookingForm.test.js   # Unit tests for the form
 └── pages/
     ├── HomePage/
-    │   ├── HomePage.js           # Hero section (landing page)
+    │   ├── HomePage.js           # Hero section + This week's specials grid
     │   └── HomePage.css
     ├── BookingPage/
     │   ├── BookingPage.js        # Hosts BookingForm; manages times via useReducer
@@ -85,6 +93,15 @@ src/
         ├── ConfirmedBooking.js   # Booking confirmation summary
         └── ConfirmedBooking.css
 ```
+
+### Key assets (`public/`)
+
+| File | Purpose |
+|---|---|
+| `Logo.svg` | Little Lemon wordmark used in header and footer |
+| `greek-salad.jpg` | Specials card image |
+| `bruschetta.jpg` | Specials card image + hero background |
+| `lemon-dessert.jpg` | Specials card image |
 
 ---
 
@@ -119,8 +136,9 @@ This avoids showing errors before the user has had a chance to fill a field, whi
 This application was built with web accessibility in mind, following WCAG 2.1 AA guidelines:
 - Colour contrast meets the 4.5:1 minimum ratio for text
 - All interactive elements are keyboard navigable
-- Landmark regions (`<header>`, `<main>`, `<section>`) provide document structure
+- Landmark regions (`<header>`, `<main>`, `<footer>`, `<section>`) provide document structure
 - Form errors are programmatically associated with their inputs
+- All images have descriptive `alt` text; decorative icons use `aria-hidden="true"`
 
 ---
 
