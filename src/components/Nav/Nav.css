@@ -1,0 +1,35 @@
+.nav__list {
+  display: flex;
+  gap: var(--spacing-lg);
+  list-style: none;
+  align-items: center;
+}
+
+.nav__link {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-dark);
+  padding-block: var(--spacing-xs);
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.nav__link:hover {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.nav__link--active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-highlight);
+}
+
+/* Collapse to burger-friendly stacking on small screens */
+@media (max-width: 600px) {
+  .nav__list {
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

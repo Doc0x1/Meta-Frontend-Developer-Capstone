@@ -1,70 +1,135 @@
-# Getting Started with Create React App
+# Little Lemon — Table Reservation App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React web application for the **Little Lemon** Mediterranean restaurant in Chicago, built as the capstone project for the Meta Front-End Developer Professional Certificate.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Table reservation form** — select a date, available time slot, party size, and occasion, with full client-side validation and accessible error messages
+- **React Router navigation** — separate pages for Home (`/`), Reservations (`/reservations`), and Booking Confirmation (`/confirmed`)
+- **Accessible UI** — semantic HTML, ARIA labels, live regions for errors, keyboard-navigable controls, and focus rings
+- **Responsive layout** — CSS custom properties + grid/flexbox adapts from mobile to desktop
+- **Unit tests** — Jest + React Testing Library covering the reducer, form rendering, validation, and submission
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Node.js](https://nodejs.org/) 18 or later
+- npm (bundled with Node.js)
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone <your-repo-url>
+cd little-lemon
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Running the app
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+```
 
-### `npm run eject`
+Opens [http://localhost:3000](http://localhost:3000) in your browser. The page reloads automatically when you save changes.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Running the tests
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm test
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Launches Jest in interactive watch mode. Press `a` to run all tests.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Building for production
 
-## Learn More
+```bash
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Outputs optimised static files to the `build/` folder.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+src/
+├── api.js                        # fetchAPI + submitAPI mock functions
+├── App.js                        # BrowserRouter + route definitions
+├── App.css                       # Global CSS custom properties (design tokens)
+├── App.test.js                   # App-level smoke tests
+├── components/
+│   ├── Header/
+│   │   ├── Header.js             # Site header with logo and nav
+│   │   └── Header.css
+│   ├── Nav/
+│   │   ├── Nav.js                # Primary navigation links
+│   │   └── Nav.css
+│   └── BookingForm/
+│       ├── BookingForm.js        # Controlled form with validation logic
+│       ├── BookingForm.css
+│       └── BookingForm.test.js   # Unit tests for the form
+└── pages/
+    ├── HomePage/
+    │   ├── HomePage.js           # Hero section (landing page)
+    │   └── HomePage.css
+    ├── BookingPage/
+    │   ├── BookingPage.js        # Hosts BookingForm; manages times via useReducer
+    │   └── BookingPage.css
+    └── ConfirmedBooking/
+        ├── ConfirmedBooking.js   # Booking confirmation summary
+        └── ConfirmedBooking.css
+```
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Design Decisions
 
-### Making a Progressive Web App
+### State management — `useReducer` for available times
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The `timesReducer` in `BookingPage.js` follows the pattern taught in the Meta course. When the user picks a date, a `UPDATE_TIMES` action is dispatched, and the reducer calls `fetchAPI(date)` to derive the new list of available time slots. This keeps the time-fetching logic pure and easy to unit-test.
 
-### Advanced Configuration
+### Form validation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Validation runs on every render (derived state from `fields`), so the form always knows whether it is valid. Errors are shown:
+- **On blur** — after the user leaves a field
+- **On submit** — all fields are checked at once
 
-### Deployment
+This avoids showing errors before the user has had a chance to fill a field, while still catching everything on submit.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Accessibility
 
-### `npm run build` fails to minify
+- All inputs are associated with a `<label>` via `htmlFor`/`id` pairs
+- `aria-required="true"` on mandatory fields
+- `aria-invalid` toggled when a field has an error
+- `aria-describedby` links each input to its error message
+- Error messages use `role="alert"` so screen readers announce them immediately
+- A form-level `aria-live="polite"` region announces the error summary on submit
+- Focus rings are preserved via `focus-visible` CSS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## Accessibility Statement
+
+This application was built with web accessibility in mind, following WCAG 2.1 AA guidelines:
+- Colour contrast meets the 4.5:1 minimum ratio for text
+- All interactive elements are keyboard navigable
+- Landmark regions (`<header>`, `<main>`, `<section>`) provide document structure
+- Form errors are programmatically associated with their inputs
+
+---
+
+## Technologies
+
+| Technology | Version | Purpose |
+|---|---|---|
+| React | 19 | UI library |
+| React Router DOM | 6 | Client-side routing |
+| React Testing Library | 16 | Component testing |
+| Jest (via react-scripts) | — | Test runner |
+| Create React App | 5 | Build tooling |

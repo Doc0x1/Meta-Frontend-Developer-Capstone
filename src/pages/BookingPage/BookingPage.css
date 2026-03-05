@@ -1,0 +1,26 @@
+.booking-page {
+  padding-block: var(--spacing-xl);
+}
+
+.booking-page .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.booking-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.booking-page__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--color-primary);
+}
+
+.booking-page__subtitle {
+  font-size: 1.1rem;
+  color: #555;
+}
